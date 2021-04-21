@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { UtilityService } from 'src/app/shared/services/utility.service';
 import { Observable } from 'rxjs';
 import { NgbdSortableHeader, SortEvent } from './sortable.directive';
-import { MySchool } from './employee-interface';
+import { Employee } from './employee-interface';
 import { DecimalPipe } from '@angular/common';
 
 @Component({
@@ -17,7 +17,7 @@ import { DecimalPipe } from '@angular/common';
 })
 export class EmployeeDetailComponent implements OnInit {
 
-  schoolProfiles$: Observable<MySchool[]>;
+  employeeProfiles$: Observable<Employee[]>;
   total$: Observable<number>;
 
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
@@ -29,9 +29,9 @@ export class EmployeeDetailComponent implements OnInit {
     private commonService: CommonService,
     public empyleeService: EmpyleeService
   ) {
-    this.schoolProfiles$ = empyleeService.schoolProfiles$;
+    this.employeeProfiles$ = empyleeService.employeeProfiles$;
     this.total$ = empyleeService.total$;
-    console.log("this.schoolProfiles$", this.schoolProfiles$);
+    console.log("this.employeeProfiles$", this.employeeProfiles$);
   }
 
   ngOnInit(): void {
@@ -44,14 +44,31 @@ export class EmployeeDetailComponent implements OnInit {
     this.commonService.getAllEmployeeList()
       .subscribe(result => {
         result.docs.forEach(doc => {
-          this.employeeList.push(doc.data());
-          console.log("result", this.employeeList);
+          let newData: any = doc.data();
+          newData.id = doc.id;
+          this.employeeList.push(newData);
         })
+        console.log("result", this.employeeList);
+
 
       }, error => {
 
       })
   };
+
+
+
+  deleteEmployeeById(index) {
+    let id = this.employeeList[index].id;
+    this.commonService.deleteEmployeeById(id)
+      .then(result => {
+        this.getAllEmployee();
+        this.utilityService.showSuccess("Deleted", "You have successfully deleted an employee");
+      })
+      .catch(error => {
+        this.utilityService.showError(error, "Something Went Wrong!");
+      })
+  }
 
 
   onSort({ column, direction }: SortEvent) {
@@ -65,6 +82,6 @@ export class EmployeeDetailComponent implements OnInit {
 
     this.empyleeService.sortColumn = column;
     this.empyleeService.sortDirection = direction;
-  }
+  };
 
 }

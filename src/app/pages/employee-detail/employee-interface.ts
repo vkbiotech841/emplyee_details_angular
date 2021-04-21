@@ -1,4 +1,4 @@
-export interface MySchool {
+export interface Employee {
     employeeId: string;
     name: string;
     email: string;

@@ -1,7 +1,7 @@
-import { MySchool } from './employee-interface';
+import { Employee } from './employee-interface';
 import { Directive, EventEmitter, Input, Output } from '@angular/core';
 
-export type SortColumn = keyof MySchool | '';
+export type SortColumn = keyof Employee | '';
 export type SortDirection = 'asc' | 'desc' | '';
 const rotate: { [key: string]: SortDirection } = { 'asc': 'desc', 'desc': '', '': 'asc' };
 

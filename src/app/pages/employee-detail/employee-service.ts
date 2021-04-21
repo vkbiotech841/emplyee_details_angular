@@ -6,13 +6,12 @@ import { SortColumn, SortDirection } from './sortable.directive';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { DecimalPipe } from '@angular/common';
 
-import { MySchool } from './employee-interface';
-import { SchoolProfileCollection } from './employee-collection';
+import { Employee } from './employee-interface';
 
 
 
 interface SearchResult {
-    schoolProfiles: MySchool[];
+    employeeProfiles: Employee[];
     total: number;
 }
 
@@ -26,18 +25,18 @@ interface State {
 
 const compare = (v1: string | number, v2: string | number) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
-function sort(schoolProfiles: MySchool[], column: SortColumn, direction: string): MySchool[] {
+function sort(employeeProfiles: Employee[], column: SortColumn, direction: string): Employee[] {
     if (direction === '' || column === '') {
-        return schoolProfiles;
+        return employeeProfiles;
     } else {
-        return [...schoolProfiles].sort((a, b) => {
+        return [...employeeProfiles].sort((a, b) => {
             const res = compare(a[column], b[column]);
             return direction === 'asc' ? res : -res;
         });
     }
 }
 
-function matches(schoolProfile: MySchool, term: string, pipe: PipeTransform) {
+function matches(schoolProfile: Employee, term: string, pipe: PipeTransform) {
     return schoolProfile.employeeId.toLowerCase().includes(term.toLowerCase())
         || schoolProfile.name.toLowerCase().includes(term.toLowerCase())
         || schoolProfile.email.toLowerCase().includes(term.toLowerCase())
@@ -54,42 +53,9 @@ function matches(schoolProfile: MySchool, term: string, pipe: PipeTransform) {
 
 export class EmpyleeService {
 
-    SchoolProfileCollection1: any[] = [
-        {
-            employeeId: "001",
-            name: 'vikram',
-            email: 'vkbiotech841@gmail.com',
-            dob: '01-09-2000',
-            password: '123',
-            confirmedPassword: '123',
-            mobileNumber: '9130113900',
-            address: 'Gola band road'
-        },
-        {
-            employeeId: "002",
-            name: 'kumar',
-            email: 'vkbiotech841@gmail.com',
-            dob: '01-09-2000',
-            password: '123',
-            confirmedPassword: '123',
-            mobileNumber: '9130113900',
-            address: 'Gola band road'
-        },
-        {
-            employeeId: "003",
-            name: 'ricky',
-            email: 'vkbiotech841@gmail.com',
-            dob: '01-09-2000',
-            password: '123',
-            confirmedPassword: '123',
-            mobileNumber: '9130113900',
-            address: 'Gola band road'
-        },
-    ];
-
     private _loading$ = new BehaviorSubject<boolean>(true);
     private _search$ = new Subject<void>();
-    private _schoolProfiles$ = new BehaviorSubject<MySchool[]>([]);
+    private _employeeProfiles$ = new BehaviorSubject<Employee[]>([]);
     private _total$ = new BehaviorSubject<number>(0);
 
     private _state: State = {
@@ -115,10 +81,13 @@ export class EmpyleeService {
         this.commonService.getAllEmployeeList()
             .subscribe(result => {
                 result.docs.forEach(doc => {
-                    this.employeeList.push(doc.data());
+                    let id = doc.id;
+                    let newData: any = doc.data();
+                    newData.id = doc.id;
+                    this.employeeList.push(newData);
                 })
                 console.log("result", this.employeeList);
-
+                // search function starts here.
                 this._search$.pipe(
                     tap(() => this._loading$.next(true)),
                     debounceTime(200),
@@ -126,7 +95,7 @@ export class EmpyleeService {
                     delay(200),
                     tap(() => this._loading$.next(false))
                 ).subscribe(result => {
-                    this._schoolProfiles$.next(result.schoolProfiles);
+                    this._employeeProfiles$.next(result.employeeProfiles);
                     this._total$.next(result.total);
                 });
 
@@ -139,8 +108,8 @@ export class EmpyleeService {
 
     //////////////////////////////////////
 
-    get schoolProfiles$() {
-        return this._schoolProfiles$.asObservable();
+    get employeeProfiles$() {
+        return this._employeeProfiles$.asObservable();
     }
     get total$() {
         return this._total$.asObservable();
@@ -184,16 +153,15 @@ export class EmpyleeService {
         const { sortColumn, sortDirection, pageSize, page, searchTerm } = this._state;
 
         // 1. sort
-        // let schoolProfiles = sort(SchoolProfileCollection, sortColumn, sortDirection);
-        let schoolProfiles = sort(this.employeeList, sortColumn, sortDirection);
+        let employeeProfiles = sort(this.employeeList, sortColumn, sortDirection);
 
 
         // 2. filter
-        schoolProfiles = schoolProfiles.filter(schoolProfile => matches(schoolProfile, searchTerm, this.pipe));
-        const total = schoolProfiles.length;
+        employeeProfiles = employeeProfiles.filter(schoolProfile => matches(schoolProfile, searchTerm, this.pipe));
+        const total = employeeProfiles.length;
 
         // 3. paginate
-        schoolProfiles = schoolProfiles.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
-        return of({ schoolProfiles, total });
+        employeeProfiles = employeeProfiles.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
+        return of({ employeeProfiles, total });
     }
 }

@@ -35,6 +35,23 @@ export class CommonService {
       .get()
   };
 
+  getEmployeeById(id: string) {
+    return this.firestore
+      .collection("employee")
+      .doc(id)
+      .get()
+  };
+
+
+  deleteEmployeeById(id: string) {
+    return this.firestore
+      .collection("employee")
+      .doc(id)
+      .delete()
+  }
+
+
+
 
 
   newData: any;
