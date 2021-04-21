@@ -2,7 +2,7 @@ export class employee {
     employeeId: string;
     name: string;
     email: string;
-    dob: any;
+    dob: string;
     password: string;
     confirmedPassword: string;
     mobileNumber: number;

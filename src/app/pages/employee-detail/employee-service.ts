@@ -1,3 +1,4 @@
+import { CommonService } from 'src/app/shared/services/common.service';
 
 import { Injectable, PipeTransform } from '@angular/core';
 import { debounceTime, delay, switchMap, tap } from 'rxjs/operators';
@@ -7,6 +8,7 @@ import { DecimalPipe } from '@angular/common';
 
 import { MySchool } from './employee-interface';
 import { SchoolProfileCollection } from './employee-collection';
+
 
 
 interface SearchResult {
@@ -36,11 +38,13 @@ function sort(schoolProfiles: MySchool[], column: SortColumn, direction: string)
 }
 
 function matches(schoolProfile: MySchool, term: string, pipe: PipeTransform) {
-    return schoolProfile.class.toLowerCase().includes(term.toLowerCase())
-        || schoolProfile.section.toLowerCase().includes(term.toLowerCase())
-        || schoolProfile.classTeacher.toLowerCase().includes(term.toLowerCase())
-        || pipe.transform(schoolProfile.studentCount).includes(term)
-        || schoolProfile.performance.toLowerCase().includes(term.toLowerCase())
+    return schoolProfile.employeeId.toLowerCase().includes(term.toLowerCase())
+        || schoolProfile.name.toLowerCase().includes(term.toLowerCase())
+        || schoolProfile.email.toLowerCase().includes(term.toLowerCase())
+        || schoolProfile.dob.toLowerCase().includes(term.toLowerCase())
+        || pipe.transform(schoolProfile.password).includes(term)
+        || pipe.transform(schoolProfile.confirmedPassword).includes(term)
+        || schoolProfile.address.toLowerCase().includes(term.toLowerCase())
 }
 
 @Injectable({
@@ -49,6 +53,39 @@ function matches(schoolProfile: MySchool, term: string, pipe: PipeTransform) {
 
 
 export class EmpyleeService {
+
+    SchoolProfileCollection1: any[] = [
+        {
+            employeeId: "001",
+            name: 'vikram',
+            email: 'vkbiotech841@gmail.com',
+            dob: '01-09-2000',
+            password: '123',
+            confirmedPassword: '123',
+            mobileNumber: '9130113900',
+            address: 'Gola band road'
+        },
+        {
+            employeeId: "002",
+            name: 'kumar',
+            email: 'vkbiotech841@gmail.com',
+            dob: '01-09-2000',
+            password: '123',
+            confirmedPassword: '123',
+            mobileNumber: '9130113900',
+            address: 'Gola band road'
+        },
+        {
+            employeeId: "003",
+            name: 'ricky',
+            email: 'vkbiotech841@gmail.com',
+            dob: '01-09-2000',
+            password: '123',
+            confirmedPassword: '123',
+            mobileNumber: '9130113900',
+            address: 'Gola band road'
+        },
+    ];
 
     private _loading$ = new BehaviorSubject<boolean>(true);
     private _search$ = new Subject<void>();
@@ -64,21 +101,43 @@ export class EmpyleeService {
     };
 
     constructor(
-        private pipe: DecimalPipe
+        private pipe: DecimalPipe,
+        private commonService: CommonService
     ) {
-        this._search$.pipe(
-            tap(() => this._loading$.next(true)),
-            debounceTime(200),
-            switchMap(() => this._search()),
-            delay(200),
-            tap(() => this._loading$.next(false))
-        ).subscribe(result => {
-            this._schoolProfiles$.next(result.schoolProfiles);
-            this._total$.next(result.total);
-        });
+        this.getAllEmployee();
 
-        this._search$.next();
     }
+
+    //////////////////////////////////////
+    employeeList: any[] = [];
+
+    getAllEmployee() {
+        this.commonService.getAllEmployeeList()
+            .subscribe(result => {
+                result.docs.forEach(doc => {
+                    this.employeeList.push(doc.data());
+                })
+                console.log("result", this.employeeList);
+
+                this._search$.pipe(
+                    tap(() => this._loading$.next(true)),
+                    debounceTime(200),
+                    switchMap(() => this._search()),
+                    delay(200),
+                    tap(() => this._loading$.next(false))
+                ).subscribe(result => {
+                    this._schoolProfiles$.next(result.schoolProfiles);
+                    this._total$.next(result.total);
+                });
+
+                this._search$.next();
+
+            }, error => {
+
+            })
+    };
+
+    //////////////////////////////////////
 
     get schoolProfiles$() {
         return this._schoolProfiles$.asObservable();
@@ -125,7 +184,9 @@ export class EmpyleeService {
         const { sortColumn, sortDirection, pageSize, page, searchTerm } = this._state;
 
         // 1. sort
-        let schoolProfiles = sort(SchoolProfileCollection, sortColumn, sortDirection);
+        // let schoolProfiles = sort(SchoolProfileCollection, sortColumn, sortDirection);
+        let schoolProfiles = sort(this.employeeList, sortColumn, sortDirection);
+
 
         // 2. filter
         schoolProfiles = schoolProfiles.filter(schoolProfile => matches(schoolProfile, searchTerm, this.pipe));

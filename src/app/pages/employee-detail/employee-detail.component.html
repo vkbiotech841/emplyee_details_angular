@@ -1,13 +1,8 @@
 <div class="container">
     <div class="container-fluid">
-        <p>This is a more complete example with a service that simulates server calling:</p>
-
-        <ul>
-            <li>an observable async service to fetch a list of countries</li>
-            <li>sorting, filtering and pagination</li>
-            <li>simulated delay and loading indicator</li>
-            <li>debouncing of search requests</li>
-        </ul>
+        <div>
+            <h2>List of Employee</h2>
+        </div>
 
         <form>
             <div class="form-group form-inline">
@@ -19,35 +14,45 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col" sortable="class" (sort)="onSort($event)">Class</th>
-                        <th scope="col" sortable="section" (sort)="onSort($event)">Section</th>
-                        <th scope="col" sortable="classTeacher" (sort)="onSort($event)">Class Teacher</th>
-                        <th scope="col" sortable="studentCount" (sort)="onSort($event)">Student count</th>
-                        <th scope="col" sortable="performance" (sort)="onSort($event)">Performance</th>
+                        <th scope="col" sortable="employeeId" (sort)="onSort($event)">Employee Id</th>
+                        <th scope="col" sortable="name" (sort)="onSort($event)">Name</th>
+                        <th scope="col" sortable="email" (sort)="onSort($event)">Email</th>
+                        <th scope="col" sortable="dob" (sort)="onSort($event)">DOB</th>
+                        <th scope="col" sortable="mobileNumber" (sort)="onSort($event)">Mobile Number</th>
+                        <th scope="col" sortable="address" (sort)="onSort($event)">Address</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let schoolProfile of schoolProfiles$ | async">
+                    <tr *ngFor="let schoolProfile of schoolProfiles$ | async;let i = index">
                         <td>
-                            <ngb-highlight [result]="schoolProfile.class" [term]="empyleeService.searchTerm">
+                            <ngb-highlight [result]="schoolProfile.employeeId" [term]="empyleeService.searchTerm">
                             </ngb-highlight>
                         </td>
                         <td>
-                            <ngb-highlight [result]="schoolProfile.section" [term]="empyleeService.searchTerm">
+                            <ngb-highlight [result]="schoolProfile.name" [term]="empyleeService.searchTerm">
                             </ngb-highlight>
                         </td>
                         <td>
-                            <ngb-highlight [result]="schoolProfile.classTeacher" [term]="empyleeService.searchTerm">
+                            <ngb-highlight [result]="schoolProfile.email" [term]="empyleeService.searchTerm">
                             </ngb-highlight>
                         </td>
                         <td>
-                            <ngb-highlight [result]="schoolProfile.studentCount | number"
+                            <ngb-highlight [result]="schoolProfile.dob" [term]="empyleeService.searchTerm">
+                            </ngb-highlight>
+                        </td>
+                        <td>
+                            <ngb-highlight [result]="schoolProfile.mobileNumber | number"
                                 [term]="empyleeService.searchTerm">
                             </ngb-highlight>
                         </td>
+
                         <td>
-                            <ngb-highlight [result]="schoolProfile.performance" [term]="empyleeService.searchTerm">
+                            <ngb-highlight [result]="schoolProfile.address" [term]="empyleeService.searchTerm">
                             </ngb-highlight>
+                        </td>
+                        <td>
+                            <button class="btn btn-secondary">View Detail</button>
                         </td>
                     </tr>
                 </tbody>

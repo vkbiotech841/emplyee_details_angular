@@ -31,6 +31,7 @@ export class EmployeeDetailComponent implements OnInit {
   ) {
     this.schoolProfiles$ = empyleeService.schoolProfiles$;
     this.total$ = empyleeService.total$;
+    console.log("this.schoolProfiles$", this.schoolProfiles$);
   }
 
   ngOnInit(): void {

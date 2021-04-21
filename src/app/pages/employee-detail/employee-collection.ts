@@ -2,172 +2,33 @@ import { MySchool } from './employee-interface'
 
 export const SchoolProfileCollection: MySchool[] = [
     {
-        class: "12th",
-        section: "B",
-        classTeacher: "vikram",
-        studentCount: 50,
-        performance: "40%"
+        employeeId: "001",
+        name: 'vikram',
+        email: 'vkbiotech841@gmail.com',
+        dob: '01-09-2000',
+        password: '123',
+        confirmedPassword: '123',
+        mobileNumber: '9130113900',
+        address: 'Gola band road'
     },
     {
-        class: "12th",
-        section: "A",
-        classTeacher: "kumar",
-        studentCount: 60,
-        performance: "20%"
+        employeeId: "002",
+        name: 'kumar',
+        email: 'vkbiotech841@gmail.com',
+        dob: '01-09-2000',
+        password: '123',
+        confirmedPassword: '123',
+        mobileNumber: '9130113900',
+        address: 'Gola band road'
     },
     {
-        class: "10th",
-        section: "A",
-        classTeacher: "wonder",
-        studentCount: 70,
-        performance: "60%"
+        employeeId: "003",
+        name: 'ricky',
+        email: 'vkbiotech841@gmail.com',
+        dob: '01-09-2000',
+        password: '123',
+        confirmedPassword: '123',
+        mobileNumber: '9130113900',
+        address: 'Gola band road'
     },
-    {
-        class: "10th",
-        section: "A",
-        classTeacher: "land",
-        studentCount: 80,
-        performance: "100%"
-    },
-    {
-        class: "10th",
-        section: "A",
-        classTeacher: "teacher name",
-        studentCount: 50,
-        performance: "60%"
-    },
-    {
-        class: "10th",
-        section: "A",
-        classTeacher: "teacher name",
-        studentCount: 50,
-        performance: "60%"
-    },
-    {
-        class: "10th",
-        section: "A",
-        classTeacher: "teacher name",
-        studentCount: 20,
-        performance: "60%"
-    },
-    {
-        class: "10th",
-        section: "A",
-        classTeacher: "teacher name",
-        studentCount: 50,
-        performance: "60%"
-    },
-    {
-        class: "10th",
-        section: "A",
-        classTeacher: "teacher name",
-        studentCount: 50,
-        performance: "60%"
-    },
-    {
-        class: "10th",
-        section: "A",
-        classTeacher: "Teacher name",
-        studentCount: 50,
-        performance: "60%"
-    },
-    {
-        class: "10th",
-        section: "A",
-        classTeacher: "Teacher name",
-        studentCount: 50,
-        performance: "60%"
-    },
-    {
-        class: "10th",
-        section: "A",
-        classTeacher: "Teacher name",
-        studentCount: 50,
-        performance: "60%"
-    },
-    {
-        class: "10th",
-        section: "A",
-        classTeacher: "Teacher name",
-        studentCount: 50,
-        performance: "60%"
-    },
-    {
-        class: "10th",
-        section: "A",
-        classTeacher: "Teacher name",
-        studentCount: 50,
-        performance: "60%"
-    },
-    {
-        class: "10th",
-        section: "A",
-        classTeacher: "Teacher name",
-        studentCount: 50,
-        performance: "60%"
-    },
-    {
-        class: "10th",
-        section: "A",
-        classTeacher: "Teacher name",
-        studentCount: 50,
-        performance: "60%"
-    },
-    {
-        class: "10th",
-        section: "A",
-        classTeacher: "Teacher name",
-        studentCount: 50,
-        performance: "60%"
-    },
-    {
-        class: "10th",
-        section: "A",
-        classTeacher: "Teacher name",
-        studentCount: 50,
-        performance: "60%"
-    },
-    {
-        class: "10th",
-        section: "A",
-        classTeacher: "Teacher name",
-        studentCount: 50,
-        performance: "60%"
-    },
-    {
-        class: "10th",
-        section: "A",
-        classTeacher: "Teacher name",
-        studentCount: 50,
-        performance: "60%"
-    },
-    {
-        class: "10th",
-        section: "A",
-        classTeacher: "Teacher name",
-        studentCount: 50,
-        performance: "60%"
-    },
-    {
-        class: "10th",
-        section: "A",
-        classTeacher: "Teacher name",
-        studentCount: 50,
-        performance: "60%"
-    },
-    {
-        class: "10th",
-        section: "A",
-        classTeacher: "Teacher name",
-        studentCount: 50,
-        performance: "60%"
-    },
-    {
-        class: "10th",
-        section: "A",
-        classTeacher: "Teacher name",
-        studentCount: 50,
-        performance: "60%"
-    },
-
 ]

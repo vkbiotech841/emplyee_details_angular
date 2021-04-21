@@ -1,7 +1,10 @@
 export interface MySchool {
-    class: string;
-    section: string;
-    classTeacher: string;
-    studentCount: number | string;
-    performance: string | string;
+    employeeId: string;
+    name: string;
+    email: string;
+    dob: any;
+    password: string;
+    confirmedPassword: string;
+    mobileNumber: number | string;
+    address: string;
 }
