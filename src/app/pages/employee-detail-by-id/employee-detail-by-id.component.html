@@ -1,16 +1,32 @@
 <div class="container">
     <div class="container-fluid">
-        <div class="card text-white bg-info mb-3" style="max-width: 18rem;" *ngIf="employeeDetails">
-            <div class="card-header">{{employeeDetails.name | uppercase}}</div>
+        <div class="card text-white bg-info mb-3" *ngIf="employeeDetails">
+            <div class="card-header">
+                <div>{{employeeDetails.name | uppercase}}</div>
+                <div class="">
+                    <div class="mt-2">
+                        <div>
+                            <div> <img src="assets/images/basicLogo/mobile_logo.svg" alt="" style="width: 2%;">
+                                {{employeeDetails.mobileNumber}}</div>
+                        </div>
+                        <div class="mt-2">
+                            <b> DOB : </b>
+                            <i>{{employeeDetails.dob}}</i>
+                        </div>
+                        <i>{{employeeDetails.email}}</i>
+                    </div>
+
+                </div>
+            </div>
+
             <div class="card-body">
                 <h6 class="card-title">
-                    <div>{{employeeDetails.dob}}</div>
-                    <div>{{employeeDetails.mobileNumber}}</div>
-                    <div>{{employeeDetails.email}}</div>
+
                 </h6>
-                <p class="card-text">
-                    {{employeeDetails.address}}
-                </p>
+                <div class="card-text">
+                    <div>Address</div>
+                    <p class="mt-2">{{employeeDetails.address}}</p>
+                </div>
             </div>
         </div>
     </div>

@@ -20,6 +20,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { NgbdSortableHeader } from './pages/employee-detail/sortable.directive';
 import { EmployeeDetailByIdComponent } from './pages/employee-detail-by-id/employee-detail-by-id.component';
+import { HeaderComponent } from './pages/header/header.component';
 
 
 @NgModule({
@@ -31,7 +32,9 @@ import { EmployeeDetailByIdComponent } from './pages/employee-detail-by-id/emplo
 
     NgbdSortableHeader,
 
-    EmployeeDetailByIdComponent
+    EmployeeDetailByIdComponent,
+
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

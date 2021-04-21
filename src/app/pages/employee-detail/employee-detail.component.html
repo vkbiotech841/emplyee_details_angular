@@ -47,7 +47,8 @@
                         </td>
 
                         <td>
-                            <ngb-highlight [result]="employeeProfile.address" [term]="searchTerm">
+                            <ngb-highlight [result]="employeeProfile.address | slice:0:10 | titlecase"
+                                [term]="searchTerm">
                             </ngb-highlight>
                         </td>
                         <td>
