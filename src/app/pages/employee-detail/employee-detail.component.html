@@ -51,8 +51,21 @@
                             </ngb-highlight>
                         </td>
                         <td>
-                            <button class="btn btn-secondary" (click)="deleteEmployeeById(i)">Delete</button>
-                            <button class="btn btn-secondary" [routerLink]="[employeeProfile.id]">View</button>
+                            <div class="d-flex">
+
+                                <div class="m-2" [routerLink]="[employeeProfile.id]"
+                                    style="outline: none; border: none;">
+                                    <img src="assets/images/basicLogo/eye_logo.svg" alt="" class="eye_logo"
+                                        placement="top" ngbTooltip="View Details" container="body">
+                                </div>
+
+                                <div class="m-2" style="outline: none; border: none;" data-toggle="modal"
+                                    data-target="#deleteQuestionModal">
+                                    <img src="assets/images/basicLogo/delete_btn_logo.svg" alt=""
+                                        class="delete_btn_logo" placement="top" ngbTooltip="Delete" container="body"
+                                        (click)="deleteEmployeeById(i)">
+                                </div>
+                            </div>
 
                         </td>
                     </tr>

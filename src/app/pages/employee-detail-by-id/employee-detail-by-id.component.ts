@@ -27,13 +27,17 @@ export class EmployeeDetailByIdComponent implements OnInit {
   };
 
 
+  employeeDetails: any;
   loadEmployeeDetailData() {
     this.commonService.getEmployeeById(this.id)
       .subscribe(result => {
+        this.employeeDetails = result.data();
         console.log("singleEmployee", result.data());
 
       }, error => {
 
       })
-  }
+  };
+
+
 }
