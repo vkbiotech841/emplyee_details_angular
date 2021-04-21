@@ -10,6 +10,13 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { environment } from 'src/environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +32,12 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     ToastrModule.forRoot(),
     HttpClientModule,
+
+    AngularFireModule.initializeApp(environment.firebaseConfig), // firebase initilization
+    AngularFirestoreModule, // firestore
+    AngularFireAuthModule, // auth
+    AngularFireStorageModule, // storage
+    AngularFireMessagingModule, // cloud messaging
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -82,18 +82,28 @@ export class EmployeeFormComponent implements OnInit {
 
         const data = this.employeeDetail;
         console.log("data", data);
+        const newData = JSON.parse(JSON.stringify(data));
 
-        this.commonService.postData(data)
-          .subscribe(result => {
+        this.commonService.createEmployee(newData)
+          .then(result => {
+            console.log("id", result.id);
+            this.employeeDetailForm.reset();
             this.utilityService.showSuccess("", "Your Request for Free Trial is Successfully Submitted.");
             this.router.navigate(["/employee"]);
-          }, error => {
-            this.utilityService.showError("", "Something Went Wrong.");
           })
+          .catch(error => {
+            this.utilityService.showError(error, "Something Went Wrong.");
+          }
+          )
+          .finally(() => {
+          }
+          )
       }
     } else {
       this.utilityService.showError("Password and Confiremed password does not match.", "Please re-check password")
     }
-  }
+  };
+
+
 
 }
