@@ -35,7 +35,11 @@
                                     <div class="col-12 col-lg-6 col-md-6 col-sm-6 mt-3">
                                         <span class="square-input-box">
                                             <input type="text" class="input-field" type="text"
-                                                formControlName="employeeId" placeholder="Employee Id*" />
+                                                formControlName="employeeId" placeholder="001" />
+                                        </span>
+                                        <span class="input-label grey-text fs-16">
+                                            Employee Id
+                                            <span style="color: red;">*</span>
                                         </span>
                                         <p class="error-message" *ngIf="employeeId.invalid && isSubmited">
                                             Employee Id is Required
@@ -45,9 +49,14 @@
                                     <div class="col-12 col-lg-6 col-md-6 col-sm-6 mt-3">
                                         <span class="square-input-box">
                                             <input type="text" class="input-field" type="text" formControlName="name"
-                                                placeholder="Name*" />
+                                                placeholder="Full Name" />
                                         </span>
-                                        <p class="error-message" *ngIf="name.invalid && isSubmited">
+                                        <span class="input-label grey-text fs-16">
+                                            Full Name
+                                            <span style="color: red;">*</span>
+                                        </span>
+                                        <p class="error-message"
+                                            *ngIf="name.invalid && isSubmited && (name.dirty || name.touched)">
                                             Name is Required
                                         </p>
                                     </div>
@@ -57,7 +66,11 @@
                                     <div class="col-12 col-lg-12 col-md-12 col-sm-12 mt-3">
                                         <span class="square-input-box">
                                             <input type="text" class="input-field" type="email" formControlName="email"
-                                                placeholder="Work Email*" />
+                                                placeholder="test@gmail.com" />
+                                        </span>
+                                        <span class="input-label grey-text fs-16">
+                                            Email Id
+                                            <span style="color: red;">*</span>
                                         </span>
                                         <p class="error-message" *ngIf="email.invalid && isSubmited">
                                             Email is Required
@@ -69,7 +82,11 @@
                                     <div class="col-12 col-lg-6 col-md-6 col-sm-6 mt-3">
                                         <span class="square-input-box">
                                             <input type="text" class="input-field" type="number"
-                                                formControlName="mobileNumber" placeholder="Mobile Number*" />
+                                                formControlName="mobileNumber" placeholder="0123456789" />
+                                        </span>
+                                        <span class="input-label grey-text fs-16">
+                                            Mobile Number
+                                            <span style="color: red;">*</span>
                                         </span>
                                         <p class="error-message" *ngIf="mobileNumber.invalid && isSubmited">
                                             Mobile Number is Required
@@ -79,6 +96,10 @@
                                         <span class="square-input-box">
                                             <input type="text" class="input-field" type="date" formControlName="dob"
                                                 placeholder="Date of Birth" />
+                                        </span>
+                                        <span class="input-label grey-text fs-16">
+                                            Date of Birth
+                                            <span style="color: red;">*</span>
                                         </span>
                                         <p class="error-message" *ngIf="dob.invalid && isSubmited">
                                             Date of Birth is Required
@@ -90,20 +111,56 @@
                                     <div class="col-12 col-lg-6 col-md-6 col-sm-6 mt-3">
                                         <span class="square-input-box">
                                             <input type="text" class="input-field" type="password"
-                                                formControlName="password" placeholder="Password*" />
+                                                formControlName="password" placeholder="Password" />
+                                        </span>
+                                        <span class="input-label grey-text fs-16">
+                                            Password
+                                            <span style="color: red;">*</span>
                                         </span>
                                         <p class="error-message" *ngIf="password.invalid && isSubmited">
                                             Password is Required
                                         </p>
+                                        <div class="error-message"
+                                            *ngIf="password.invalid && (password.dirty || password.touched)">
+                                            <div *ngIf="password.errors.required">
+                                                Password is required.
+                                            </div>
+                                            <div *ngIf="password.errors.minlength">
+                                                Password must be at least 8 letters.
+                                            </div>
+                                            <div *ngIf="password.errors.pattern">
+                                                Password must have at least 1 special character, 1 Upper case, 1 lower
+                                                case
+                                                and 1 number.
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-12 col-lg-6 col-md-6 col-sm-6 mt-3">
                                         <span class="square-input-box">
                                             <input type="text" class="input-field" type="password"
-                                                formControlName="confirmedPassword" placeholder="Confirmed Password*" />
+                                                formControlName="confirmedPassword" placeholder="Confirmed Password" />
+                                        </span>
+                                        <span class="input-label grey-text fs-16">
+                                            Confirmed Password
+                                            <span style="color: red;">*</span>
                                         </span>
                                         <p class="error-message" *ngIf="confirmedPassword.invalid && isSubmited">
                                             Confirmed Password is Required
                                         </p>
+                                        <div class="error-message"
+                                            *ngIf="confirmedPassword.invalid && (confirmedPassword.dirty || confirmedPassword.touched)">
+                                            <div *ngIf="confirmedPassword.errors.required">
+                                                Password is required.
+                                            </div>
+                                            <div *ngIf="confirmedPassword.errors.minlength">
+                                                Password must be at least 8 letters.
+                                            </div>
+                                            <div *ngIf="confirmedPassword.errors.pattern">
+                                                Password must have at least 1 special character, 1 Upper case, 1 lower
+                                                case
+                                                and 1 number.
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -111,7 +168,11 @@
                                     <div class="col-12 col-lg-12 col-md-12 col-sm-12 mt-3">
                                         <span class="square-input-box">
                                             <textarea name="" id="" cols="10" rows="3" class="input-field" type="text"
-                                                formControlName="address" placeholder="Address*"></textarea>
+                                                formControlName="address" placeholder="Address"></textarea>
+                                        </span>
+                                        <span class="input-label grey-text fs-16">
+                                            Address
+                                            <span style="color: red;">*</span>
                                         </span>
                                         <p class="error-message" *ngIf="confirmedPassword.invalid && isSubmited">
                                             Address Password is Required

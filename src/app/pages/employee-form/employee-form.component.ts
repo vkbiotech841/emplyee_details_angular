@@ -1,9 +1,18 @@
 import { employee } from './../../shared/models/employee-model';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { UtilityService } from 'src/app/shared/services/utility.service';
+
+
+// Form Validation pattern
+export function patternValidator(pattern: RegExp): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const forbidden = !pattern.test(control.value);;
+    return forbidden ? { 'pattern': { value: control.value } } : null;
+  };
+}
 
 @Component({
   selector: 'app-employee-form',
@@ -29,6 +38,8 @@ export class EmployeeFormComponent implements OnInit {
 
   isSubmited: boolean = false;
 
+
+
   constructor(
     private formBuilder: FormBuilder,
     private utilityService: UtilityService,
@@ -46,8 +57,20 @@ export class EmployeeFormComponent implements OnInit {
     this.name = new FormControl("", [Validators.required]);
     this.email = new FormControl("", [Validators.required, Validators.email]);
     this.dob = new FormControl("", [Validators.required]);
-    this.password = new FormControl("", [Validators.required]);
-    this.confirmedPassword = new FormControl("", [Validators.required]);
+    this.password = new FormControl("",
+      [
+        Validators.required,
+        Validators.minLength(8),
+        patternValidator(new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"))
+      ]
+    );
+    this.confirmedPassword = new FormControl("",
+      [
+        Validators.required,
+        Validators.minLength(8),
+        patternValidator(new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"))
+      ]
+    );
     this.mobileNumber = new FormControl("", [Validators.required]);
     this.address = new FormControl("", [Validators.required]);
 

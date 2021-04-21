@@ -41,9 +41,10 @@ function matches(schoolProfile: Employee, term: string, pipe: PipeTransform) {
   return schoolProfile.employeeId.toLowerCase().includes(term.toLowerCase())
     || schoolProfile.name.toLowerCase().includes(term.toLowerCase())
     || schoolProfile.email.toLowerCase().includes(term.toLowerCase())
-    || schoolProfile.dob.toLowerCase().includes(term.toLowerCase())
+    || schoolProfile.dob.includes(term.toLowerCase())
     || pipe.transform(schoolProfile.password).includes(term)
     || pipe.transform(schoolProfile.confirmedPassword).includes(term)
+    || schoolProfile.mobileNumber.toLowerCase().includes(term.toLowerCase())
     || schoolProfile.address.toLowerCase().includes(term.toLowerCase())
 }
 

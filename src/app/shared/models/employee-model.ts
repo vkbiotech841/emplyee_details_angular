@@ -5,6 +5,6 @@ export class employee {
     dob: string;
     password: string;
     confirmedPassword: string;
-    mobileNumber: number;
+    mobileNumber: string;
     address: string;
 }
