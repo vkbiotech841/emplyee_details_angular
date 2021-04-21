@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap/dist/css/bootstrap.css";
+
+@import "./assets/styles/utilities/fonts.scss";
+@import "./assets/styles/utilities/common.scss";
+@import "./assets/styles/variables/colors.scss";
+@import "./assets//styles/components/button.scss";
+@import "./assets/styles/components/theme.scss";
+@import "./assets/styles/utilities/typography.scss";
+
+// regular style toast
+@import "~ngx-toastr/toastr";

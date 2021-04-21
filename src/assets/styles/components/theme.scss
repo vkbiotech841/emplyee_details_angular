@@ -1,0 +1,69 @@
+// fonts
+// @font-face {
+//   font-family: "poppins";
+//   src: url("assets/fonts/Poppins-Regular.ttf") format("truetype"); /* Safari, Android, iOS */
+// }
+// @font-face {
+//   font-family: "Noto Sans";
+//   src: url("assets/fonts/NotoSans-Regular.ttf") format("truetype"); /* Safari, Android, iOS */
+// }
+
+@font-face {
+  font-family: "poppins";
+  src: url("../../fonts/Poppins-Regular.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+@font-face {
+  font-family: "Noto Sans";
+  src: url("../../fonts/NotoSans-Regular.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+
+//////////// Global Fonts starts here ///////////////////////////////
+.ns-font {
+  font-family: "Noto Sans";
+}
+.p-font {
+  font-family: "poppins";
+}
+
+p {
+  font-family: "poppins";
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Noto Sans";
+}
+
+a {
+  font-family: "poppins";
+}
+
+span {
+  font-family: "poppins";
+}
+
+div {
+  font-family: "poppins";
+}
+
+strong {
+  font-family: "poppins";
+}
+
+b {
+  font-family: "poppins";
+}
+
+small {
+  font-family: "poppins";
+}
+
+.btn {
+  font-family: "poppins";
+}
+
+//////////// Fonts ends here ///////////////////////////////
