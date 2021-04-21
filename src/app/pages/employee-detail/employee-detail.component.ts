@@ -97,22 +97,7 @@ export class EmployeeDetailComponent implements OnInit {
           this.employeeList.push(newData);
         })
         console.log("result", this.employeeList);
-
-        // search function starts here.
-        this._search$.pipe(
-          tap(() => this._loading$.next(true)),
-          debounceTime(200),
-          switchMap(() => this._search()),
-          delay(200),
-          tap(() => this._loading$.next(false))
-        ).subscribe(result => {
-          this._employeeProfiles$.next(result.employeeProfiles);
-          this._total$.next(result.total);
-        });
-
-        this._search$.next();
-
-
+        this.onSearch();
       }, error => {
 
       })
@@ -128,7 +113,7 @@ export class EmployeeDetailComponent implements OnInit {
       .catch(error => {
         this.utilityService.showError(error, "Something Went Wrong!");
       })
-  }
+  };
 
 
   onSort({ column, direction }: SortEvent) {
@@ -145,41 +130,66 @@ export class EmployeeDetailComponent implements OnInit {
   };
 
 
+  onSearch() {
+    // search function starts here.
+    this._search$.pipe(
+      tap(() => this._loading$.next(true)),
+      debounceTime(200),
+      switchMap(() => this._search()),
+      delay(200),
+      tap(() => this._loading$.next(false))
+    ).subscribe(result => {
+      this._employeeProfiles$.next(result.employeeProfiles);
+      this._total$.next(result.total);
+    });
+
+    this._search$.next();
+  };
+
+
   get employeeProfiles$() {
     return this._employeeProfiles$.asObservable();
-  }
+  };
+
   get total$() {
     return this._total$.asObservable();
-  }
+  };
+
   get loading$() {
     return this._loading$.asObservable();
-  }
+  };
 
   get page() {
     return this._state.page;
-  }
+  };
+
   get pageSize() {
     return this._state.pageSize;
-  }
+  };
+
   get searchTerm() {
     return this._state.searchTerm;
-  }
+  };
 
   set page(page: number) {
     this._set({ page });
-  }
+  };
+
   set pageSize(pageSize: number) {
     this._set({ pageSize });
-  }
+  };
+
   set searchTerm(searchTerm: string) {
     this._set({ searchTerm });
-  }
+  };
+
   set sortColumn(sortColumn: SortColumn) {
     this._set({ sortColumn });
-  }
+  };
+
   set sortDirection(sortDirection: SortDirection) {
     this._set({ sortDirection });
-  }
+  };
 
   private _set(patch: Partial<State>) {
     Object.assign(this._state, patch);
@@ -200,6 +210,6 @@ export class EmployeeDetailComponent implements OnInit {
     // 3. paginate
     employeeProfiles = employeeProfiles.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
     return of({ employeeProfiles, total });
-  }
+  };
 
 }
