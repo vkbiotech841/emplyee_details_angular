@@ -54,11 +54,16 @@
                         <td>
                             <div class="d-flex">
 
-                                <div class="m-2" [routerLink]="[employeeProfile.id]"
+                                <!-- <div class="m-2" [routerLink]="[employeeProfile.id]"
                                     style="outline: none; border: none;">
                                     <img src="assets/images/basicLogo/eye_logo.svg" alt="" class="eye_logo"
                                         placement="top" ngbTooltip="View Details" container="body">
-                                </div>
+                                </div> -->
+                                <a class="m-2" style="outline: none; border: none;" [routerLink]="[employeeProfile.id]">
+                                    <img src="assets/images/basicLogo/eye_logo.svg" alt="" class="eye_logo"
+                                        placement="top" ngbTooltip="View Details" container="body">
+
+                                </a>
 
                                 <div class="m-2" style="outline: none; border: none;" data-toggle="modal"
                                     data-target="#deleteQuestionModal">
@@ -87,3 +92,52 @@
         </form>
     </div>
 </div>
+
+
+<ng-template #userModal let-modal>
+    <div class=" modal-header">
+        <h4 class="modal-title">User Information</h4>
+        <button type="button" class="close" aria-label="Close" (click)="closeEmployeeDetails()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="card text-white bg-info mb-3" *ngIf="employeeDetails">
+            <div class="card-header">
+                <div>{{employeeDetails.name | uppercase}}</div>
+                <div class="">
+                    <div class="mt-2">
+                        <div>
+                            <div> <img src="assets/images/basicLogo/mobile_logo.svg" alt="" style="width: 2%;">
+                                {{employeeDetails.mobileNumber}}</div>
+                        </div>
+                        <div class="mt-2">
+                            <b> DOB : </b>
+                            <i>{{employeeDetails.dob }}</i>
+                        </div>
+                        <i>{{employeeDetails.email}}</i>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card-body">
+                <h6 class="card-title">
+
+                </h6>
+                <div class="card-text">
+                    <div>Address</div>
+                    <p class="mt-2">{{employeeDetails.address}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="closeEmployeeDetails()">
+            Close
+        </button>
+    </div>
+</ng-template>

@@ -1,14 +1,16 @@
 
 import { CommonService } from 'src/app/shared/services/common.service';
 
-import { Component, OnInit, PipeTransform, QueryList, ViewChildren } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, PipeTransform, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UtilityService } from 'src/app/shared/services/utility.service';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { NgbdSortableHeader, SortColumn, SortDirection, SortEvent } from './sortable.directive';
 import { Employee } from './employee-interface';
-import { DecimalPipe } from '@angular/common';
+import { DecimalPipe, Location } from '@angular/common';
 import { debounceTime, delay, switchMap, tap } from 'rxjs/operators';
+
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 
 interface SearchResult {
@@ -70,8 +72,9 @@ export class EmployeeDetailComponent implements OnInit {
     sortDirection: ''
   };
 
-  // employeeProfiles$: Observable<Employee[]>;
-  // total$: Observable<number>;
+
+  // For displaying ng-bootstrap modal
+  @ViewChild('userModal', { static: false }) userModal: NgbModalRef;
 
   @ViewChildren(NgbdSortableHeader) headers!: QueryList<NgbdSortableHeader>;
 
@@ -81,10 +84,16 @@ export class EmployeeDetailComponent implements OnInit {
     private router: Router,
     private commonService: CommonService,
     private pipe: DecimalPipe,
-  ) { }
+    private modalService: NgbModal,
+    private activatedRoute: ActivatedRoute,
+    private location: Location
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.getAllEmployee();
+    this.getParams();
   }
 
   employeeList: any[] = [];
@@ -213,5 +222,46 @@ export class EmployeeDetailComponent implements OnInit {
     employeeProfiles = employeeProfiles.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
     return of({ employeeProfiles, total });
   };
+
+  employeeDetails: any;
+
+  employeeDetailModel: any;
+  showEmployeeDetails(employeeId: string) {
+    this.commonService.getEmployeeById(employeeId)
+      .subscribe(result => {
+        this.employeeDetails = result.data();
+        console.log("singleEmployee", result.data());
+        this.openModel();
+
+      }, error => {
+
+      })
+  }
+
+  openModel() {
+    this.employeeDetailModel = this.modalService.open(this.userModal, {
+      centered: true,
+      size: "xl",
+      scrollable: true
+    });
+  }
+
+  closeEmployeeDetails() {
+    this.employeeDetailModel.close();
+    this.location.back();
+  }
+
+
+  id: string;
+  getParams() {
+    this.activatedRoute.params.subscribe((params) => {
+      console.log("params", params);
+      if (params.employeeId) {
+        this.showEmployeeDetails(params.employeeId);
+      }
+    });
+  }
+
+
 
 }
