@@ -52,7 +52,7 @@
                         </td>
                         <td>
                             <button class="btn btn-secondary" (click)="deleteEmployeeById(i)">Delete</button>
-                            <button class="btn btn-secondary">View</button>
+                            <button class="btn btn-secondary" [routerLink]="[employeeProfile.id]">View</button>
 
                         </td>
                     </tr>

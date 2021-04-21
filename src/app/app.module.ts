@@ -19,6 +19,7 @@ import { environment } from 'src/environments/environment';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { NgbdSortableHeader } from './pages/employee-detail/sortable.directive';
+import { EmployeeDetailByIdComponent } from './pages/employee-detail-by-id/employee-detail-by-id.component';
 
 
 @NgModule({
@@ -28,7 +29,9 @@ import { NgbdSortableHeader } from './pages/employee-detail/sortable.directive';
     EmployeeDetailComponent,
     FooterComponent,
 
-    NgbdSortableHeader
+    NgbdSortableHeader,
+
+    EmployeeDetailByIdComponent
   ],
   imports: [
     BrowserModule,

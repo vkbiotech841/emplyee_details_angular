@@ -58,6 +58,7 @@ export class EmployeeDetailComponent implements OnInit {
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
   private _employeeProfiles$ = new BehaviorSubject<Employee[]>([]);
+  private _employeeList$ = new BehaviorSubject<Employee[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
 
   private _state: State = {
@@ -96,7 +97,7 @@ export class EmployeeDetailComponent implements OnInit {
           newData.id = doc.id;
           this.employeeList.push(newData);
         })
-        console.log("result", this.employeeList);
+        console.log("employeeList", this.employeeList);
         this.onSearch();
       }, error => {
 
@@ -131,7 +132,6 @@ export class EmployeeDetailComponent implements OnInit {
 
 
   onSearch() {
-    // search function starts here.
     this._search$.pipe(
       tap(() => this._loading$.next(true)),
       debounceTime(200),
@@ -139,6 +139,7 @@ export class EmployeeDetailComponent implements OnInit {
       delay(200),
       tap(() => this._loading$.next(false))
     ).subscribe(result => {
+      console.log("result", result);
       this._employeeProfiles$.next(result.employeeProfiles);
       this._total$.next(result.total);
     });

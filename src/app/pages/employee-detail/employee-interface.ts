@@ -7,4 +7,5 @@ export interface Employee {
     confirmedPassword: string;
     mobileNumber: number | string;
     address: string;
+    id?: string;
 }
