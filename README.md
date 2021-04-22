@@ -1,3 +1,5 @@
+# Deploly for Firebase:
+https://employee-angular-615d0.firebaseapp.com/
 # EmployDetailsAngular
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.1.
