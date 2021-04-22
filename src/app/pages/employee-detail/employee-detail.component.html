@@ -1,14 +1,14 @@
 <div class="container">
     <div class="container-fluid">
-        <div>
+        <div class="row d-flex justify-content-center">
             <h2>List of Employee</h2>
         </div>
 
-        <form>
+        <form class="mt-5">
             <div class="d-flex" style="justify-content: space-between;">
                 <div class="form-group form-inline">
-                    Full text search: <input class="form-control ml-2" type="text" name="searchTerm"
-                        [(ngModel)]="searchTerm" />
+                    <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="searchTerm"
+                        placeholder="Full text search" style="border-radius: 10px;" />
                     <span class="ml-3" *ngIf="loading$ | async">Loading...</span>
                 </div>
                 <div>

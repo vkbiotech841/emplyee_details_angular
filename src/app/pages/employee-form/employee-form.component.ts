@@ -38,6 +38,8 @@ export class EmployeeFormComponent implements OnInit {
 
   isSubmited: boolean = false;
 
+  isLoading: boolean = false;
+
 
 
   constructor(
@@ -90,9 +92,11 @@ export class EmployeeFormComponent implements OnInit {
 
   submitUserDetails() {
     this.isSubmited = true;
+    this.isLoading = true;
     if (this.password.value === this.confirmedPassword.value) {
       if (this.employeeDetailForm.invalid) {
         this.utilityService.showError("Please Fill All Mendatory(*) fields before submittion", "Try Again");
+        this.isLoading = false;
       } else {
         this.employeeDetail.employeeId = this.employeeId.value;
         this.employeeDetail.name = this.name.value;
@@ -111,19 +115,23 @@ export class EmployeeFormComponent implements OnInit {
           .then(result => {
             console.log("id", result.id);
             this.employeeDetailForm.reset();
+            this.isLoading = false;
             this.utilityService.showSuccess("", "Your Request for Free Trial is Successfully Submitted.");
             this.router.navigate(["/employee"]);
           })
           .catch(error => {
             this.utilityService.showError(error, "Something Went Wrong.");
+            this.isLoading = false;
           }
           )
           .finally(() => {
+            this.isLoading = false;
           }
           )
       }
     } else {
-      this.utilityService.showError("Password and Confiremed password does not match.", "Please re-check password")
+      this.utilityService.showError("Password and Confiremed password does not match.", "Please re-check password");
+      this.isLoading = false;
     }
   };
 

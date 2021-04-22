@@ -191,6 +191,10 @@
                                         style="display: flex; justify-content: center;">
                                         <button class="btn btn-secondary trial-btn w-100" (click)="submitUserDetails()">
                                             SAVE
+                                            <span *ngIf="isLoading"
+                                                class="spinner-border spinner-border-sm text-warning m-1" role="status"
+                                                aria-hidden="true">
+                                            </span>
                                         </button>
                                     </div>
                                 </div>
