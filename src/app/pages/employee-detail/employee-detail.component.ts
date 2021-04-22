@@ -39,15 +39,13 @@ function sort(employeeProfiles: Employee[], column: SortColumn, direction: strin
   }
 }
 
-function matches(schoolProfile: Employee, term: string, pipe: PipeTransform) {
-  return schoolProfile.employeeId.toLowerCase().includes(term.toLowerCase())
-    || schoolProfile.name.toLowerCase().includes(term.toLowerCase())
-    || schoolProfile.email.toLowerCase().includes(term.toLowerCase())
-    || schoolProfile.dob.includes(term.toLowerCase())
-    || pipe.transform(schoolProfile.password).includes(term)
-    || pipe.transform(schoolProfile.confirmedPassword).includes(term)
-    || schoolProfile.mobileNumber.toLowerCase().includes(term.toLowerCase())
-    || schoolProfile.address.toLowerCase().includes(term.toLowerCase())
+function matches(employeeProfile: Employee, term: string, pipe: PipeTransform) {
+  return employeeProfile.employeeId.toLowerCase().includes(term.toLowerCase())
+    || employeeProfile.name.toLowerCase().includes(term.toLowerCase())
+    || employeeProfile.email.includes(term.toLowerCase())
+    || employeeProfile.dob.includes(term.toLowerCase())
+    || employeeProfile.mobileNumber.toLowerCase().includes(term.toLowerCase())
+    || employeeProfile.address.toLowerCase().includes(term.toLowerCase())
 }
 
 @Component({
@@ -176,7 +174,6 @@ export class EmployeeDetailComponent implements OnInit {
   };
 
   get pageSize() {
-    console.log("pageSize", this._state.pageSize);
     return this._state.pageSize;
   };
 
@@ -217,7 +214,7 @@ export class EmployeeDetailComponent implements OnInit {
 
 
     // 2. filter
-    employeeProfiles = employeeProfiles.filter(schoolProfile => matches(schoolProfile, searchTerm, this.pipe));
+    employeeProfiles = employeeProfiles.filter(employeeProfile => matches(employeeProfile, searchTerm, this.pipe));
     const total = employeeProfiles.length;
 
     // 3. paginate
