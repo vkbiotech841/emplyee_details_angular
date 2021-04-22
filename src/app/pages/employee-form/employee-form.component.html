@@ -97,6 +97,12 @@
                                         <p class="error-message" *ngIf="mobileNumber.invalid && isSubmited">
                                             Mobile Number is Required
                                         </p>
+                                        <div class="error-message"
+                                            *ngIf="mobileNumber.invalid && (mobileNumber.dirty || mobileNumber.touched)">
+                                            <div *ngIf="mobileNumber.errors.minlength">
+                                                Mobile Number must be at least 10 digits long.
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-12 col-lg-6 col-md-6 col-sm-6 mt-3">
                                         <span class="square-input-box">

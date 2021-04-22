@@ -26,3 +26,18 @@
   // width: 100%;
   margin: 0;
 }
+
+.pagination-btn {
+  justify-content: flex-end;
+}
+
+// For mobiles
+@media (max-width: 575px) {
+  .hide-mobile {
+    display: none;
+  }
+
+  .pagination-btn {
+    margin-top: 2%;
+  }
+}

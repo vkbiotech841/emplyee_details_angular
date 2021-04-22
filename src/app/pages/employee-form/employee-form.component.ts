@@ -73,7 +73,7 @@ export class EmployeeFormComponent implements OnInit {
         patternValidator(new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"))
       ]
     );
-    this.mobileNumber = new FormControl("", [Validators.required]);
+    this.mobileNumber = new FormControl("", [Validators.required, Validators.minLength(10)]);
     this.address = new FormControl("", [Validators.required]);
 
     this.employeeDetailForm = this.formBuilder.group({
