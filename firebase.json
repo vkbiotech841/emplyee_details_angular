@@ -1,11 +1,8 @@
 {
   "hosting": {
+    "site": "employee-erp-angular",
     "public": "dist/employee-erp-angular",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "**",
