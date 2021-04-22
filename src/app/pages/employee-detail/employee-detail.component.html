@@ -33,7 +33,7 @@
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody style="font-size: 14px;">
                         <tr *ngFor="let employeeProfile of employeeProfiles$ | async;let i = index">
                             <td>
                                 <ngb-highlight [result]="employeeProfile.employeeId" [term]="searchTerm">
@@ -44,7 +44,7 @@
                                 </ngb-highlight>
                             </td>
                             <td class="hide-mobile">
-                                <ngb-highlight [result]="employeeProfile.email" [term]="searchTerm">
+                                <ngb-highlight [result]="employeeProfile.email " [term]="searchTerm">
                                 </ngb-highlight>
                             </td>
                             <td class="hide-mobile">
@@ -169,7 +169,9 @@
                             container="body" class="pointer">
                     </div>
                     <div>
-                        <div class=" card-text mt-2">{{employeeDetails.address}}</div>
+                        <div class="row card-text mt-1">
+                            <div class="w-50 ml-2">{{employeeDetails.address}}</div>
+                        </div>
                     </div>
                 </div>
             </div>
