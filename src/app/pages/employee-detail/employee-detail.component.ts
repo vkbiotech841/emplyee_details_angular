@@ -61,16 +61,17 @@ export class EmployeeDetailComponent implements OnInit {
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
   private _employeeProfiles$ = new BehaviorSubject<Employee[]>([]);
-  private _employeeList$ = new BehaviorSubject<Employee[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
 
   private _state: State = {
     page: 1,
-    pageSize: 10,
+    pageSize: 5,
     searchTerm: '',
     sortColumn: '',
     sortDirection: ''
   };
+
+  itemPerPage = 5;
 
 
   // For displaying ng-bootstrap modal
@@ -175,6 +176,7 @@ export class EmployeeDetailComponent implements OnInit {
   };
 
   get pageSize() {
+    console.log("pageSize", this._state.pageSize);
     return this._state.pageSize;
   };
 
@@ -236,7 +238,7 @@ export class EmployeeDetailComponent implements OnInit {
       }, error => {
 
       })
-  }
+  };
 
   openModel() {
     this.employeeDetailModel = this.modalService.open(this.userModal, {
@@ -244,12 +246,12 @@ export class EmployeeDetailComponent implements OnInit {
       size: "xl",
       scrollable: true
     });
-  }
+  };
 
   closeEmployeeDetails() {
     this.employeeDetailModel.close();
     this.location.back();
-  }
+  };
 
 
   id: string;
@@ -260,7 +262,7 @@ export class EmployeeDetailComponent implements OnInit {
         this.showEmployeeDetails(params.employeeId);
       }
     });
-  }
+  };
 
 
 

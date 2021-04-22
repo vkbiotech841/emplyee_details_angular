@@ -5,88 +5,97 @@
         </div>
 
         <form>
-            <div class="form-group form-inline">
-                Full text search: <input class="form-control ml-2" type="text" name="searchTerm"
-                    [(ngModel)]="searchTerm" />
-                <span class="ml-3" *ngIf="loading$ | async">Loading...</span>
+            <div class="d-flex" style="justify-content: space-between;">
+                <div class="form-group form-inline">
+                    Full text search: <input class="form-control ml-2" type="text" name="searchTerm"
+                        [(ngModel)]="searchTerm" />
+                    <span class="ml-3" *ngIf="loading$ | async">Loading...</span>
+                </div>
+                <div>
+                    <button class="btn btn-secondary view-employees" [routerLink]="['/']">
+                        Add Employees
+                    </button>
+                </div>
             </div>
 
-            <table class="table table-striped text-center">
-                <thead>
-                    <tr>
-                        <th scope="col" sortable="employeeId" (sort)="onSort($event)">Employee Id</th>
-                        <th scope="col" sortable="name" (sort)="onSort($event)">Name</th>
-                        <th scope="col" sortable="email" (sort)="onSort($event)">Email</th>
-                        <th scope="col" sortable="dob" (sort)="onSort($event)">DOB</th>
-                        <th scope="col" sortable="mobileNumber" (sort)="onSort($event)">Mobile Number</th>
-                        <th scope="col" sortable="address" (sort)="onSort($event)">Address</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let employeeProfile of employeeProfiles$ | async;let i = index">
-                        <td>
-                            <ngb-highlight [result]="employeeProfile.employeeId" [term]="searchTerm">
-                            </ngb-highlight>
-                        </td>
-                        <td>
-                            <ngb-highlight [result]="employeeProfile.name" [term]="searchTerm">
-                            </ngb-highlight>
-                        </td>
-                        <td>
-                            <ngb-highlight [result]="employeeProfile.email" [term]="searchTerm">
-                            </ngb-highlight>
-                        </td>
-                        <td>
-                            <ngb-highlight [result]="employeeProfile.dob " [term]="searchTerm">
-                            </ngb-highlight>
-                        </td>
-                        <td>
-                            <ngb-highlight [result]="employeeProfile.mobileNumber" [term]="searchTerm">
-                            </ngb-highlight>
-                        </td>
 
-                        <td>
-                            <ngb-highlight [result]="employeeProfile.address | slice:0:10 | titlecase"
-                                [term]="searchTerm">
-                            </ngb-highlight>
-                        </td>
-                        <td>
-                            <div class="d-flex">
+            <div class="table-responsive">
+                <table class="table table-striped text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col" sortable="employeeId" (sort)="onSort($event)">Employee Id</th>
+                            <th scope="col" sortable="name" (sort)="onSort($event)">Name</th>
+                            <th scope="col" sortable="email" (sort)="onSort($event)">Email</th>
+                            <th scope="col" sortable="dob" (sort)="onSort($event)">DOB</th>
+                            <th scope="col" sortable="mobileNumber" (sort)="onSort($event)">Mobile Number</th>
+                            <th scope="col" sortable="address" (sort)="onSort($event)">Address</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let employeeProfile of employeeProfiles$ | async;let i = index">
+                            <td>
+                                <ngb-highlight [result]="employeeProfile.employeeId" [term]="searchTerm">
+                                </ngb-highlight>
+                            </td>
+                            <td>
+                                <ngb-highlight [result]="employeeProfile.name" [term]="searchTerm">
+                                </ngb-highlight>
+                            </td>
+                            <td>
+                                <ngb-highlight [result]="employeeProfile.email" [term]="searchTerm">
+                                </ngb-highlight>
+                            </td>
+                            <td>
+                                <ngb-highlight [result]="employeeProfile.dob " [term]="searchTerm">
+                                </ngb-highlight>
+                            </td>
+                            <td>
+                                <ngb-highlight [result]="employeeProfile.mobileNumber" [term]="searchTerm">
+                                </ngb-highlight>
+                            </td>
 
-                                <!-- <div class="m-2" [routerLink]="[employeeProfile.id]"
-                                    style="outline: none; border: none;">
-                                    <img src="assets/images/basicLogo/eye_logo.svg" alt="" class="eye_logo"
-                                        placement="top" ngbTooltip="View Details" container="body">
-                                </div> -->
-                                <a class="m-2" style="outline: none; border: none;" [routerLink]="[employeeProfile.id]">
-                                    <img src="assets/images/basicLogo/eye_logo.svg" alt="" class="eye_logo"
-                                        placement="top" ngbTooltip="View Details" container="body">
+                            <td>
+                                <ngb-highlight [result]="employeeProfile.address | slice:0:10 | titlecase"
+                                    [term]="searchTerm">
+                                </ngb-highlight>
+                            </td>
+                            <td>
+                                <div class="d-flex">
+                                    <a class="m-2" style="outline: none; border: none;"
+                                        [routerLink]="[employeeProfile.id]">
+                                        <img src="assets/images/basicLogo/eye_logo.svg" alt="" class="eye_logo"
+                                            placement="top" ngbTooltip="View Details" container="body">
 
-                                </a>
+                                    </a>
 
-                                <div class="m-2" style="outline: none; border: none;" data-toggle="modal"
-                                    data-target="#deleteQuestionModal">
-                                    <img src="assets/images/basicLogo/delete_btn_logo.svg" alt=""
-                                        class="delete_btn_logo" placement="top" ngbTooltip="Delete" container="body"
-                                        (click)="deleteEmployeeById(i)">
+                                    <div class="m-2" style="outline: none; border: none;" data-toggle="modal"
+                                        data-target="#deleteQuestionModal">
+                                        <img src="assets/images/basicLogo/delete_btn_logo.svg" alt=""
+                                            class="delete_btn_logo" placement="top" ngbTooltip="Delete" container="body"
+                                            (click)="deleteEmployeeById(i)">
+                                    </div>
                                 </div>
-                            </div>
 
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
 
             <div class="d-flex justify-content-between p-2">
-                <ngb-pagination [collectionSize]="(total$ | async)!" [(page)]="page" [pageSize]="pageSize">
-                </ngb-pagination>
-
                 <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="pageSize">
-                    <option [ngValue]="2">2 items per page</option>
-                    <option [ngValue]="4">4 items per page</option>
-                    <option [ngValue]="6">6 items per page</option>
+                    <option [ngValue]="pageSize">{{pageSize}} items/page</option>
+                    <option [ngValue]="5">5 items per page</option>
+                    <option [ngValue]="10">10 items per page</option>
+                    <option [ngValue]="50">50 items per page</option>
+                    <option [ngValue]="100">100 items per page</option>
                 </select>
+
+                <ngb-pagination [collectionSize]="(total$ | async)!" [(page)]="page" [pageSize]="pageSize"
+                    [boundaryLinks]="true">
+                </ngb-pagination>
             </div>
 
         </form>
