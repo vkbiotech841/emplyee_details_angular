@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "employee-erp-angular",
+    "site": "employee-angular-615d0",
     "public": "dist/employee-erp-angular",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
